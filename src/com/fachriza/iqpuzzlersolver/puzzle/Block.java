@@ -19,6 +19,10 @@ public class Block {
         coordinates.add(new Point(x, y));
     }
 
+    public List<Point> getCoordinates() {
+        return coordinates;
+    }
+
     public byte getID() {
         return ID;
     }

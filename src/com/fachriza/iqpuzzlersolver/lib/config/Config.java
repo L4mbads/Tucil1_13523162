@@ -10,6 +10,7 @@ public class Config {
     private int boardHeight;
     private int boardWidth;
     private int blockNum;
+    private int blockNeff = 0;
 
     private Block[] blocks;
     private Board board;
@@ -37,6 +38,11 @@ public class Config {
 
     public Block[] getBlocks() {
         return blocks;
+    }
+
+    public void addBlock(Block block) {
+        blocks[blockNeff] = block;
+        blockNeff++;
     }
 
     public String toString() {

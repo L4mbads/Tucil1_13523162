@@ -9,6 +9,7 @@ import java.nio.file.Files;
 
 import com.fachriza.iqpuzzlersolver.lib.config.Config;
 import com.fachriza.iqpuzzlersolver.puzzle.Block;
+import com.fachriza.iqpuzzlersolver.lib.type.Point;
 
 public class ConfigHandler {
     Path filePath;
@@ -21,6 +22,8 @@ public class ConfigHandler {
         FINISHED
     }
 
+    private Config config;
+
     public ConfigHandler(String fileName) throws Exception {
         filePath = Paths.get("config", fileName);
         if (!Files.exists(filePath))
@@ -29,12 +32,16 @@ public class ConfigHandler {
         try (BufferedReader reader = Files.newBufferedReader(filePath)) {
             String line;
             ConfigState configState = ConfigState.NUMBERS;
-            Config config = new Config();
+            config = new Config();
             Block block = null;
+            int offsetX = -1;
+            int offsetY = 0;
             while (configState != ConfigState.FINISHED) {
                 line = reader.readLine();
                 if (line == null) {
                     if (configState == ConfigState.BLOCKS) {
+                        if (block != null)
+                            config.addBlock(block);
                         configState = ConfigState.FINISHED;
                     }
                     break;
@@ -101,6 +108,38 @@ public class ConfigHandler {
                         break;
 
                     case ConfigState.BLOCKS:
+
+                        for (int i = 0; i < line.length(); i++) {
+                            char cc = line.charAt(i);
+                            byte blockID = (byte) cc;
+                            if (Character.isWhitespace(cc)) {
+                                continue;
+                            } else if (blockID < 65 || blockID > 90) {
+                                throw new Exception("Block configuration invalid");
+                            } else {
+                                if (block == null || block.getID() != blockID) {
+
+                                    if (block != null) {
+                                        config.addBlock(block);
+                                        offsetX = -1;
+                                        offsetY = 0;
+                                    }
+
+                                    block = new Block(blockID);
+
+                                    if (offsetX == -1) {
+                                        offsetX = i;
+                                    }
+
+                                    block.addCoordinates(i - offsetX, offsetY);
+                                } else if (block.getID() == blockID) {
+                                    block.addCoordinates(i - offsetX, offsetY);
+                                }
+                            }
+                        }
+
+                        offsetY += 1;
+
                         // System.out.println(line);
                         break;
 
@@ -109,10 +148,21 @@ public class ConfigHandler {
                 }
 
                 // System.out.println(line);
+
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // for (Block block : config.getBlocks()) {
+        // System.out.print((char) block.getID());
+        // for (Point coordinate : block.getCoordinates()) {
+        // System.out.println(coordinate);
+        // }
+        // }
     }
 
+    public Config getConfig() {
+        return config;
+    }
 }
