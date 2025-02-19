@@ -1,21 +1,28 @@
 package com.fachriza.iqpuzzlersolver.puzzle;
 
-import com.fachriza.iqpuzzlersolver.lib.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fachriza.iqpuzzlersolver.lib.type.Point;
+import com.fachriza.iqpuzzlersolver.lib.Color;
 
 public class Board {
     private byte[][] grid;
+    private final int height;
+    private final int width;
 
-    public Board(int height, int width) {
+    public Board(int N, int M) {
+        height = N;
+        width = M;
         grid = new byte[height][width];
     }
 
     public int getElement(int x, int y) {
-        return grid[x][y];
+        return grid[y][x];
     }
 
     public void setElement(int x, int y, byte val) {
-        grid[x][y] = val;
+        grid[y][x] = val;
     }
 
     private Color.Colors[] colorTable = {
@@ -48,22 +55,44 @@ public class Board {
             Color.Colors.PINK
     };
 
+    public boolean isSolved() {
+        for (byte[] col : grid) {
+            for (byte elem : col) {
+                if (elem == 0) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean isCoordinateValid(int x, int y) {
+        return (x >= 0 && x < width && y >= 0 && y < height);
+    }
+
     public boolean placeBlock(int centerX, int centerY, Block block) {
 
+        List<Point> placed = new ArrayList<Point>();
         for (Point points : block.getCoordinates()) {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
 
-            if ((posX < 0 || posX >= grid[0].length || posY < 0 || posY >= grid.length)
-                    || getElement(posX, posY) != 0) {
-                removeBlock(centerX, centerY, block);
+            if (!isCoordinateValid(posX, posY) || getElement(posX, posY) != 0) {
+                // removeBlock(centerX, centerY, block);
+                // while (!placed.isEmpty()) {
+                // Point point = placed.removeFirst();
+                // setElement(point.x, point.y, (byte) 0);
+                // }
+                for (Point point : placed) {
+                    setElement(point.x, point.y, (byte) 0);
+                }
                 return false;
             }
 
             setElement(posX, posY, block.getID());
+            placed.add(new Point(posX, posY));
         }
-
-        System.out.println(this);
+        // System.out.println(this);
         return true;
     }
 
@@ -72,7 +101,7 @@ public class Board {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
 
-            if ((posX >= 0 && posX < grid[0].length && posY >= 0 && posY < grid.length)
+            if (isCoordinateValid(posX, posY)
                     && (getElement(posX, posY) == 0 || getElement(posX, posY) == block.getID())) {
                 setElement(posX, posY, (byte) 0);
             }
@@ -86,6 +115,7 @@ public class Board {
             for (byte elem : col) {
                 if (elem >= 65 && elem <= 90) {
                     System.out.print(Color.colorize(String.valueOf((char) elem), colorTable[elem - 65]));
+                    // System.out.print((char) elem);
                 } else {
                     System.out.print(".");
                 }

@@ -1,8 +1,5 @@
 package com.fachriza.iqpuzzlersolver.lib.config;
 
-import java.util.List;
-import java.util.ArrayList;
-
 import com.fachriza.iqpuzzlersolver.puzzle.Block;
 import com.fachriza.iqpuzzlersolver.puzzle.Board;
 

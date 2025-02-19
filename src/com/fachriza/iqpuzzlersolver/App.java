@@ -1,7 +1,10 @@
 package com.fachriza.iqpuzzlersolver;
 
+import java.text.DecimalFormat;
+
 import com.fachriza.iqpuzzlersolver.lib.config.ConfigHandler;
 import com.fachriza.iqpuzzlersolver.puzzle.Solver;
+import com.fachriza.iqpuzzlersolver.puzzle.Solver.SolverState;
 
 public class App {
     public static void main(String[] args) {
@@ -18,10 +21,26 @@ public class App {
             return;
         }
         Solver solver = new Solver(configHandler.getConfig());
-        long startTime = System.nanoTime();
-        solver.solve();
-        long estimatedTime = System.nanoTime() - startTime;
-        long estimatedTimeInMs = estimatedTime *= 0.000001;
-        System.out.println(estimatedTimeInMs);
+        Solver.SolverState solverState = solver.solve();
+        switch (solverState) {
+            case SolverState.SUCCESS:
+                System.out.println("Success");
+                break;
+
+            case SolverState.FAIL_NO_SOLUTION:
+                System.out.println("No solution");
+                break;
+
+            case SolverState.FAIL_OVER_PIECE:
+                System.out.println("Too much blocks");
+                break;
+
+            default:
+                break;
+        }
+        System.out.println(configHandler.getConfig().getBoard());
+        DecimalFormat df = new DecimalFormat("0.0000");
+        System.out.println(" Time: " + df.format(solver.getTimeElapsedInNs() * 0.000001) + " ms");
+        System.out.println("Cases: " + solver.cases);
     }
 }
