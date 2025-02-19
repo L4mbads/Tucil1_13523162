@@ -114,8 +114,13 @@ public class Board {
         for (byte[] col : grid) {
             for (byte elem : col) {
                 if (elem >= 65 && elem <= 90) {
-                    System.out.print(Color.colorize(String.valueOf((char) elem), colorTable[elem - 65]));
-                    // System.out.print((char) elem);
+                    // TODO: fix colors
+
+                    // System.out.print(Color.colorize(String.valueOf((char) elem), colorTable[elem
+                    // - 65]));
+                    System.out.print((char) elem);
+                } else if (elem == -1) {
+                    System.out.print(" ");
                 } else {
                     System.out.print(".");
                 }

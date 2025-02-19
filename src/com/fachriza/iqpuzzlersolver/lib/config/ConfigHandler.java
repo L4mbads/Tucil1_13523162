@@ -95,14 +95,24 @@ public class ConfigHandler {
                                 break;
 
                             case "CUSTOM":
-
+                                for (int y = 0; y < config.getHeight(); y++) {
+                                    line = reader.readLine().strip();
+                                    for (int x = 0; x < config.getWidth(); x++) {
+                                        char elem = line.charAt(x);
+                                        if (elem == '.') {
+                                            config.getBoard().setElement(x, y, (byte) -1);
+                                        } else if (elem != 'X') {
+                                            throw new Exception("CUSTOM board configuration is invalid");
+                                        }
+                                    }
+                                }
                                 break;
 
                             case "PYRAMID":
-                                throw new Exception("PYRAMID configuration is not supported");
+                                throw new Exception("PYRAMID board configuration is not supported");
 
                             default:
-                                break;
+                                throw new Exception(line + " board configuration is not defined");
                         }
                         configState = ConfigState.BLOCKS;
                         break;
