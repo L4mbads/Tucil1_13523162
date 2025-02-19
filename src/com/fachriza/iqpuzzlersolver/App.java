@@ -22,6 +22,6 @@ public class App {
         solver.solve();
         long estimatedTime = System.nanoTime() - startTime;
         long estimatedTimeInMs = estimatedTime *= 0.000001;
-        System.out.println(estimatedTime);
+        System.out.println(estimatedTimeInMs);
     }
 }
