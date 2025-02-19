@@ -1,6 +1,7 @@
 package com.fachriza.iqpuzzlersolver;
 
 import com.fachriza.iqpuzzlersolver.lib.config.ConfigHandler;
+import com.fachriza.iqpuzzlersolver.puzzle.Solver;
 
 public class App {
     public static void main(String[] args) {
@@ -16,5 +17,11 @@ public class App {
             System.err.println(e.getMessage());
             return;
         }
+        Solver solver = new Solver(configHandler.getConfig());
+        long startTime = System.nanoTime();
+        solver.solve();
+        long estimatedTime = System.nanoTime() - startTime;
+        long estimatedTimeInMs = estimatedTime *= 0.000001;
+        System.out.println(estimatedTime);
     }
 }

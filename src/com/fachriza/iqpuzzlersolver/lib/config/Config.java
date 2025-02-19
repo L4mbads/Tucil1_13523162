@@ -40,9 +40,21 @@ public class Config {
         return blocks;
     }
 
+    public int getHeight() {
+        return boardHeight;
+    }
+
+    public int getWidth() {
+        return boardWidth;
+    }
+
     public void addBlock(Block block) {
         blocks[blockNeff] = block;
         blockNeff++;
+    }
+
+    public int getBlockNum() {
+        return blockNum;
     }
 
     public String toString() {
