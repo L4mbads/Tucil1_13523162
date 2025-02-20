@@ -142,6 +142,7 @@ public class ConfigHandler {
 
                                     if (offsetX == -1) {
                                         offsetX = i;
+                                        continue;
                                     }
 
                                     block.addCoordinates(i - offsetX, offsetY);

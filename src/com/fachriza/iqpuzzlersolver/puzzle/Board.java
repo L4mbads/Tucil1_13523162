@@ -77,6 +77,7 @@ public class Board {
     public boolean placeBlock(int centerX, int centerY, Block block) {
 
         List<Point> placed = new ArrayList<Point>();
+        setElement(centerX, centerY, block.getID());
         for (Point points : block.getCoordinates()) {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
@@ -87,6 +88,7 @@ public class Board {
                 // Point point = placed.removeFirst();
                 // setElement(point.x, point.y, (byte) 0);
                 // }
+                setElement(centerX, centerY, (byte) 0);
                 for (Point point : placed) {
                     setElement(point.x, point.y, (byte) 0);
                 }
@@ -101,6 +103,7 @@ public class Board {
     }
 
     public void removeBlock(int centerX, int centerY, Block block) {
+        setElement(centerX, centerY, (byte) 0);
         for (Point points : block.getCoordinates()) {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
