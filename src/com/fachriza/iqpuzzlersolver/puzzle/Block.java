@@ -9,6 +9,7 @@ public class Block {
 
     private List<Point> coordinates;
     private final byte ID;
+    private List<List<Point>> variants = new ArrayList<>();
 
     public Block(byte ID) {
         this.ID = ID;
@@ -49,5 +50,49 @@ public class Block {
             flipped.addCoordinates(point.y, point.x);
         }
         return flipped;
+    }
+
+    public void setVariant(int idx) {
+        coordinates = variants.get(idx);
+    }
+
+    public void generateVariants() {
+        variants.add(coordinates);
+        List<Point> variant = new ArrayList<Point>();
+        for (Point point : coordinates) {
+            variant.add(new Point(point.y, point.x));
+        }
+        variants.add(variant);
+        variant = new ArrayList<Point>();
+        for (Point point : coordinates) {
+            variant.add(new Point(-point.x, point.y));
+        }
+        variants.add(variant);
+        variant = new ArrayList<Point>();
+        for (Point point : coordinates) {
+            variant.add(new Point(point.y, -point.x));
+        }
+        variants.add(variant);
+        variant = new ArrayList<Point>();
+        for (Point point : coordinates) {
+            variant.add(new Point(point.x, -point.y));
+        }
+        variants.add(variant);
+        variant = new ArrayList<Point>();
+        for (Point point : coordinates) {
+            variant.add(new Point(-point.y, point.x));
+        }
+        variants.add(variant);
+        variant = new ArrayList<Point>();
+        for (Point point : coordinates) {
+            variant.add(new Point(-point.x, -point.y));
+        }
+        variants.add(variant);
+        variant = new ArrayList<Point>();
+        for (Point point : coordinates) {
+            variant.add(new Point(-point.y, -point.x));
+        }
+        variants.add(variant);
+
     }
 }

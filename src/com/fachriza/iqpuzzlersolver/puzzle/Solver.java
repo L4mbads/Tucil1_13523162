@@ -73,61 +73,77 @@ public class Solver {
                 }
                 boardIsFull = false;
 
-                if (board.placeBlock(j, i, block)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, block);
+                // if (board.placeBlock(j, i, block)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, block);
+                // }
+                for (int k = 0; k < 8; k++) {
+                    block.setVariant(k);
+                    if (board.placeBlock(j, i, block)) {
+                        cases++;
+                        if (tryPlaceBlock())
+                            return true;
+                        board.removeBlock(j, i, block);
+                        block.setVariant(0);
+                    }
                 }
-                Block modified = block.getMirroredXY();
-                if (board.placeBlock(j, i, modified)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, modified);
-                }
-                modified = block.getMirroredX();
-                if (board.placeBlock(j, i, modified)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, modified);
-                }
-                modified = modified.getMirroredXY();
-                if (board.placeBlock(j, i, modified)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, modified);
-                }
-                modified = modified.getMirroredY();
-                if (board.placeBlock(j, i, modified)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, modified);
-                }
-                modified = modified.getMirroredXY();
-                if (board.placeBlock(j, i, modified)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, modified);
-                }
-                modified = block.getMirroredY();
-                if (board.placeBlock(j, i, modified)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, modified);
-                }
-                modified = modified.getMirroredXY();
-                if (board.placeBlock(j, i, modified)) {
-                    cases++;
-                    if (tryPlaceBlock())
-                        return true;
-                    board.removeBlock(j, i, modified);
-                }
+                // if (board.placeBlock(j, i, block)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, block);
+                // }
+                // Block modified = block.getMirroredXY();
+                // if (board.placeBlock(j, i, modified)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, modified);
+                // }
+                // modified = block.getMirroredX();
+                // if (board.placeBlock(j, i, modified)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, modified);
+                // }
+                // modified = modified.getMirroredXY();
+                // if (board.placeBlock(j, i, modified)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, modified);
+                // }
+                // modified = modified.getMirroredY();
+                // if (board.placeBlock(j, i, modified)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, modified);
+                // }
+                // modified = modified.getMirroredXY();
+                // if (board.placeBlock(j, i, modified)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, modified);
+                // }
+                // modified = block.getMirroredY();
+                // if (board.placeBlock(j, i, modified)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, modified);
+                // }
+                // modified = modified.getMirroredXY();
+                // if (board.placeBlock(j, i, modified)) {
+                // cases++;
+                // if (tryPlaceBlock())
+                // return true;
+                // board.removeBlock(j, i, modified);
+                // }
 
             }
         }

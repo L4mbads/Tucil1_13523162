@@ -40,8 +40,10 @@ public class ConfigHandler {
                 line = reader.readLine();
                 if (line == null) {
                     if (configState == ConfigState.BLOCKS) {
-                        if (block != null)
+                        if (block != null) {
+                            block.generateVariants();
                             config.addBlock(block);
+                        }
                         configState = ConfigState.FINISHED;
                     }
                     break;
@@ -130,6 +132,7 @@ public class ConfigHandler {
                                 if (block == null || block.getID() != blockID) {
 
                                     if (block != null) {
+                                        block.generateVariants();
                                         config.addBlock(block);
                                         offsetX = -1;
                                         offsetY = 0;
