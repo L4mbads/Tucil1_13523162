@@ -10,6 +10,7 @@ public class Board {
     private byte[][] grid;
     private final int height;
     private final int width;
+    private boolean isColorEnabled = true;
 
     public Board(int N, int M) {
         height = N;
@@ -23,6 +24,10 @@ public class Board {
 
     public void setElement(int x, int y, byte val) {
         grid[y][x] = val;
+    }
+
+    public void setColor(boolean val) {
+        isColorEnabled = val;
     }
 
     private Color.Colors[] colorTable = {
@@ -42,17 +47,16 @@ public class Board {
             Color.Colors.BRIGHT_MAGENTA,
             Color.Colors.BRIGHT_CYAN,
             Color.Colors.BRIGHT_WHITE,
-            Color.Colors.DARK_GRAY,
-            Color.Colors.LIGHT_BLACK,
-            Color.Colors.LIGHT_RED,
-            Color.Colors.LIGHT_GREEN,
-            Color.Colors.LIGHT_YELLOW,
-            Color.Colors.LIGHT_BLUE,
-            Color.Colors.LIGHT_MAGENTA,
-            Color.Colors.LIGHT_CYAN,
-            Color.Colors.LIGHT_WHITE,
-            Color.Colors.ORANGE,
-            Color.Colors.PINK
+            Color.Colors.UNDER_BLACK,
+            Color.Colors.UNDER_RED,
+            Color.Colors.UNDER_GREEN,
+            Color.Colors.UNDER_YELLOW,
+            Color.Colors.UNDER_BLUE,
+            Color.Colors.UNDER_MAGENTA,
+            Color.Colors.UNDER_CYAN,
+            Color.Colors.UNDER_WHITE,
+            Color.Colors.BACK_RED,
+            Color.Colors.BACK_GREEN
     };
 
     public boolean isSolved() {
@@ -114,22 +118,18 @@ public class Board {
         for (byte[] col : grid) {
             for (byte elem : col) {
                 if (elem >= 65 && elem <= 90) {
-                    // TODO: fix colors
-
-                    // System.out.print(Color.colorize(String.valueOf((char) elem), colorTable[elem
-                    // - 65]));
-                    // System.out.print((char) elem);
-                    sb.append((char) elem);
+                    if (isColorEnabled) {
+                        sb.append(Color.colorize(String.valueOf((char) elem), colorTable[elem - 65]));
+                    } else {
+                        sb.append((char) elem);
+                    }
                 } else if (elem == -1) {
                     sb.append(" ");
-                    // System.out.print(" ");
                 } else {
                     sb.append(".");
-                    // System.out.print(".");
                 }
             }
             sb.append(System.lineSeparator());
-            // System.out.println("");
 
         }
         return sb.toString();

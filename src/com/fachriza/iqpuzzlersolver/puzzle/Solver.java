@@ -20,7 +20,7 @@ public class Solver {
 
     private Deque<Block> stack = new ArrayDeque<Block>();
 
-    public int cases = 0;
+    private int cases = 0;
 
     public Solver(Config config) {
         this.config = config;
@@ -140,6 +140,10 @@ public class Solver {
 
     public long getTimeElapsedInNs() {
         return timeElapsedInNs;
+    }
+
+    public int getCases() {
+        return cases;
     }
 
 }

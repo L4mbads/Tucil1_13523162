@@ -36,9 +36,12 @@ public class SaveHandler {
 
             try (FileWriter fw = new FileWriter(filePath.toFile(), StandardCharsets.UTF_8);
                     BufferedWriter writer = new BufferedWriter(fw)) {
+                config.getBoard().setColor(false);
                 writer.write(config.getBoard().toString());
                 writer.newLine();
                 writer.write(String.valueOf(solver.getTimeElapsedInNs() * 0.000001));
+                writer.newLine();
+                writer.write(String.valueOf(solver.getCases()));
                 System.out.println("File written successfully!");
             } catch (IOException e) {
                 e.printStackTrace();

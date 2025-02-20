@@ -44,7 +44,7 @@ public class App {
 
         System.out.println(configHandler.getConfig().getBoard());
         System.out.println(" Time: " + df.format(solver.getTimeElapsedInNs() * 0.000001) + " ms");
-        System.out.println("Cases: " + solver.cases);
+        System.out.println("Cases: " + solver.getCases());
 
         SaveHandler.promptSave(configHandler.getConfig(), solver);
 
