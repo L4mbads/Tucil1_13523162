@@ -118,14 +118,18 @@ public class Board {
 
                     // System.out.print(Color.colorize(String.valueOf((char) elem), colorTable[elem
                     // - 65]));
-                    System.out.print((char) elem);
+                    // System.out.print((char) elem);
+                    sb.append((char) elem);
                 } else if (elem == -1) {
-                    System.out.print(" ");
+                    sb.append(" ");
+                    // System.out.print(" ");
                 } else {
-                    System.out.print(".");
+                    sb.append(".");
+                    // System.out.print(".");
                 }
             }
-            System.out.println("");
+            sb.append(System.lineSeparator());
+            // System.out.println("");
 
         }
         return sb.toString();

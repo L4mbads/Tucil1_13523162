@@ -2,11 +2,14 @@ package com.fachriza.iqpuzzlersolver;
 
 import java.text.DecimalFormat;
 
+import com.fachriza.iqpuzzlersolver.lib.SaveHandler;
 import com.fachriza.iqpuzzlersolver.lib.config.ConfigHandler;
 import com.fachriza.iqpuzzlersolver.puzzle.Solver;
 import com.fachriza.iqpuzzlersolver.puzzle.Solver.SolverState;
 
 public class App {
+    private final static DecimalFormat df = new DecimalFormat("0.0000");
+
     public static void main(String[] args) {
 
         if (args.length == 0) {
@@ -38,9 +41,12 @@ public class App {
             default:
                 break;
         }
+
         System.out.println(configHandler.getConfig().getBoard());
-        DecimalFormat df = new DecimalFormat("0.0000");
         System.out.println(" Time: " + df.format(solver.getTimeElapsedInNs() * 0.000001) + " ms");
         System.out.println("Cases: " + solver.cases);
+
+        SaveHandler.promptSave(configHandler.getConfig(), solver);
+
     }
 }
