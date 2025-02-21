@@ -26,13 +26,11 @@ public class SaveHandler {
             if (res.equals("n"))
                 return;
 
-            System.out.print("Masukkan nama file (lengkap dengan format): ");
+            System.out.print("Masukkan nama file (tanpa format): ");
             String fileName = scanner.nextLine();
-            filePath = Paths.get("test", fileName);
+            filePath = Paths.get("test", fileName + ".txt");
             if (!Files.exists(filePath))
                 Files.createFile(filePath);
-
-            // Files.writeString(filePath, "halo", StandardCharsets.UTF_8);
 
             try (FileWriter fw = new FileWriter(filePath.toFile(), StandardCharsets.UTF_8);
                     BufferedWriter writer = new BufferedWriter(fw)) {
@@ -43,6 +41,7 @@ public class SaveHandler {
                 writer.newLine();
                 writer.write(String.valueOf(solver.getCases()));
                 System.out.println("File written successfully!");
+                ImageGenerator.generateImage(config, fileName);
             } catch (IOException e) {
                 e.printStackTrace();
             }

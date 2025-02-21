@@ -30,35 +30,6 @@ public class Board {
         isColorEnabled = val;
     }
 
-    private Color.Colors[] colorTable = {
-            Color.Colors.BLACK,
-            Color.Colors.RED,
-            Color.Colors.GREEN,
-            Color.Colors.YELLOW,
-            Color.Colors.BLUE,
-            Color.Colors.MAGENTA,
-            Color.Colors.CYAN,
-            Color.Colors.WHITE,
-            Color.Colors.BRIGHT_BLACK,
-            Color.Colors.BRIGHT_RED,
-            Color.Colors.BRIGHT_GREEN,
-            Color.Colors.BRIGHT_YELLOW,
-            Color.Colors.BRIGHT_BLUE,
-            Color.Colors.BRIGHT_MAGENTA,
-            Color.Colors.BRIGHT_CYAN,
-            Color.Colors.BRIGHT_WHITE,
-            Color.Colors.UNDER_BLACK,
-            Color.Colors.UNDER_RED,
-            Color.Colors.UNDER_GREEN,
-            Color.Colors.UNDER_YELLOW,
-            Color.Colors.UNDER_BLUE,
-            Color.Colors.UNDER_MAGENTA,
-            Color.Colors.UNDER_CYAN,
-            Color.Colors.UNDER_WHITE,
-            Color.Colors.BACK_RED,
-            Color.Colors.BACK_GREEN
-    };
-
     public boolean isSolved() {
         for (byte[] col : grid) {
             for (byte elem : col) {
@@ -116,7 +87,7 @@ public class Board {
             for (byte elem : col) {
                 if (elem >= 65 && elem <= 90) {
                     if (isColorEnabled) {
-                        sb.append(Color.colorize(String.valueOf((char) elem), colorTable[elem - 65]));
+                        sb.append(Color.colorize(String.valueOf((char) elem), Color.colorTable[elem - 65]));
                     } else {
                         sb.append((char) elem);
                     }

@@ -35,6 +35,35 @@ public class Color {
         BACK_GREEN
     }
 
+    public static Color.Colors[] colorTable = {
+            Color.Colors.BLACK,
+            Color.Colors.RED,
+            Color.Colors.GREEN,
+            Color.Colors.YELLOW,
+            Color.Colors.BLUE,
+            Color.Colors.MAGENTA,
+            Color.Colors.CYAN,
+            Color.Colors.WHITE,
+            Color.Colors.BRIGHT_BLACK,
+            Color.Colors.BRIGHT_RED,
+            Color.Colors.BRIGHT_GREEN,
+            Color.Colors.BRIGHT_YELLOW,
+            Color.Colors.BRIGHT_BLUE,
+            Color.Colors.BRIGHT_MAGENTA,
+            Color.Colors.BRIGHT_CYAN,
+            Color.Colors.BRIGHT_WHITE,
+            Color.Colors.UNDER_BLACK,
+            Color.Colors.UNDER_RED,
+            Color.Colors.UNDER_GREEN,
+            Color.Colors.UNDER_YELLOW,
+            Color.Colors.UNDER_BLUE,
+            Color.Colors.UNDER_MAGENTA,
+            Color.Colors.UNDER_CYAN,
+            Color.Colors.UNDER_WHITE,
+            Color.Colors.BACK_RED,
+            Color.Colors.BACK_GREEN
+    };
+
     private static Map<Colors, String> ColorMap = Map.ofEntries(
             Map.entry(Colors.BLACK, "\033[0;30m"),
             Map.entry(Colors.RED, "\033[0;31m"),
