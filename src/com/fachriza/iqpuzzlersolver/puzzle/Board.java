@@ -74,20 +74,15 @@ public class Board {
         return (x >= 0 && x < width && y >= 0 && y < height);
     }
 
-    public boolean placeBlock(int centerX, int centerY, Block block) {
+    public boolean placeBlock(int centerX, int centerY, Block block, int variantIdx) {
 
         List<Point> placed = new ArrayList<Point>();
         setElement(centerX, centerY, block.getID());
-        for (Point points : block.getCoordinates()) {
+        for (Point points : block.getCoordinates(variantIdx)) {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
 
             if (!isCoordinateValid(posX, posY) || getElement(posX, posY) != 0) {
-                // removeBlock(centerX, centerY, block);
-                // while (!placed.isEmpty()) {
-                // Point point = placed.removeFirst();
-                // setElement(point.x, point.y, (byte) 0);
-                // }
                 setElement(centerX, centerY, (byte) 0);
                 for (Point point : placed) {
                     setElement(point.x, point.y, (byte) 0);
@@ -98,13 +93,12 @@ public class Board {
             setElement(posX, posY, block.getID());
             placed.add(new Point(posX, posY));
         }
-        // System.out.println(this);
         return true;
     }
 
-    public void removeBlock(int centerX, int centerY, Block block) {
+    public void removeBlock(int centerX, int centerY, Block block, int variantIdx) {
         setElement(centerX, centerY, (byte) 0);
-        for (Point points : block.getCoordinates()) {
+        for (Point points : block.getCoordinates(variantIdx)) {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
 
