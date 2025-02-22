@@ -48,13 +48,11 @@ public class Board {
     public boolean placeBlock(int centerX, int centerY, Block block, int variantIdx) {
 
         List<Point> placed = new ArrayList<Point>();
-        setElement(centerX, centerY, block.getID());
         for (Point points : block.getCoordinates(variantIdx)) {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
 
             if (!isCoordinateValid(posX, posY) || getElement(posX, posY) != 0) {
-                setElement(centerX, centerY, (byte) 0);
                 for (Point point : placed) {
                     setElement(point.x, point.y, (byte) 0);
                 }
@@ -68,7 +66,6 @@ public class Board {
     }
 
     public void removeBlock(int centerX, int centerY, Block block, int variantIdx) {
-        setElement(centerX, centerY, (byte) 0);
         for (Point points : block.getCoordinates(variantIdx)) {
             int posX = centerX + points.x;
             int posY = centerY + points.y;
@@ -92,9 +89,9 @@ public class Board {
                         sb.append((char) elem);
                     }
                 } else if (elem == -1) {
-                    sb.append(" ");
-                } else {
                     sb.append(".");
+                } else {
+                    sb.append("X");
                 }
             }
             sb.append(System.lineSeparator());

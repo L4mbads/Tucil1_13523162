@@ -34,24 +34,35 @@ public class Block {
     }
 
     private boolean isSymmetrical(List<Point> modified, int offsetX, int offsetY) {
-        for (Point point : modified) {
-            Point offset = new Point(point.x + offsetX, point.y + offsetY);
-            if (offset.x == 0 && offset.y == 0)
-                continue;
-            boolean containPoints = false;
-            for (Point point2 : variants.get(0)) {
-                if (offsetX == point2.x && offsetY == point2.y)
-                    continue;
-                if ((offset.x == point2.x && offset.y == point2.y)) {
-                    containPoints = true;
+        boolean hasFoundSymmetry = true;
+        for (List<Point> variant : variants) {
+            for (Point point : modified) {
+
+                Point offset = new Point(point.x + offsetX, point.y + offsetY);
+                boolean containPoints = false;
+
+                for (Point point2 : variant) {
+                    if ((offset.x == point2.x && offset.y == point2.y)) {
+                        containPoints = true;
+                        break;
+                    }
+                }
+
+                if (!containPoints) {
+                    // System.out.println("Tidak ada");
+                    hasFoundSymmetry = false;
                     break;
                 }
             }
-            if (!containPoints) {
-                return false;
+            if (!hasFoundSymmetry) {
+                hasFoundSymmetry = true;
+            } else {
+                // System.out.println("simetris");
+                return true;
             }
         }
-        return true;
+        // System.out.println("tidak simetrsi");
+        return false;
     }
 
     private Point calculateMinMaxOffset(List<Point> coordinates) {
@@ -84,6 +95,7 @@ public class Block {
         for (Point point : original) {
             modified.add(new Point(point.y, point.x));
         }
+        // System.out.println("xy");
         if (!isSymmetrical(modified, 0, 0)) {
             variants.add(modified);
         }
@@ -92,6 +104,7 @@ public class Block {
         for (Point point : original) {
             modified.add(new Point(-point.x, point.y));
         }
+        // System.out.println("x");
         if (!isSymmetrical(modified, offsets.x, 0)) {
             variants.add(modified);
             modified = new ArrayList<>();
@@ -107,6 +120,7 @@ public class Block {
         for (Point point : original) {
             modified.add(new Point(point.x, -point.y));
         }
+        // System.out.println("y");
         if (!isSymmetrical(modified, 0, offsets.y)) {
             variants.add(modified);
             modified = new ArrayList<>();
@@ -123,6 +137,7 @@ public class Block {
             for (Point point : original) {
                 modified.add(new Point(-point.x, -point.y));
             }
+            // System.out.println("x y");
             if (!isSymmetrical(modified, offsets.x, offsets.y)) {
                 variants.add(modified);
                 modified = new ArrayList<>();
@@ -130,6 +145,18 @@ public class Block {
                     modified.add(new Point(-point.y, -point.x));
                 }
                 variants.add(modified);
+            }
+        }
+        // System.out.print((char) ID);
+        // System.out.print(" : ");
+        // System.out.println(variants.size());
+
+        for (List<Point> variant : variants) {
+            for (Point point : variant) {
+                if (point.x == 0 && point.y == 0) {
+                    variant.remove(point);
+                    break;
+                }
             }
         }
     }

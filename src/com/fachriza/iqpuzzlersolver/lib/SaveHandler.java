@@ -14,8 +14,9 @@ import com.fachriza.iqpuzzlersolver.puzzle.Solver;
 
 public class SaveHandler {
 
-    public static void promptSave(Config config, Solver solver) {
+    public static void promptSave(Solver solver) {
         Path filePath;
+        Config config = solver.getConfig();
         try (Scanner scanner = new Scanner(System.in)) {
             System.out.print("Save result?: ");
             String res;
@@ -29,19 +30,17 @@ public class SaveHandler {
             System.out.print("Masukkan nama file (tanpa format): ");
             String fileName = scanner.nextLine();
             filePath = Paths.get("test", fileName + ".txt");
+
             if (!Files.exists(filePath))
                 Files.createFile(filePath);
 
             try (FileWriter fw = new FileWriter(filePath.toFile(), StandardCharsets.UTF_8);
                     BufferedWriter writer = new BufferedWriter(fw)) {
                 config.getBoard().setColor(false);
-                writer.write(config.getBoard().toString());
-                writer.newLine();
-                writer.write(String.valueOf(solver.getTimeElapsedInNs() * 0.000001));
-                writer.newLine();
-                writer.write(String.valueOf(solver.getCases()));
+                writer.write(solver.getResult());
                 System.out.println("File written successfully!");
                 ImageGenerator.generateImage(config, fileName);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
