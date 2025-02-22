@@ -1,0 +1,10 @@
+SUCCESS
+
+ABBCC
+AABDC
+EEEDD
+EEFFF
+GGGFF
+
+Time : 9.5938 ms
+Cases: 928

@@ -1,0 +1,10 @@
+SUCCESS
+
+...A...
+.BBAAA.
+BBBCCCC
+.EEECD.
+...E...
+
+Time : 1.3129 ms
+Cases: 40

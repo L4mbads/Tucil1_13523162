@@ -1,0 +1,10 @@
+SUCCESS
+
+..HH.CCC..
+F.H..DCG.K
+F.HH.DDG.K
+F.PP.DGGKK
+FFPPPDDGKK
+
+Time : 37.7459 ms
+Cases: 3733
