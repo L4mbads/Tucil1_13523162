@@ -14,10 +14,10 @@ import com.fachriza.iqpuzzlersolver.puzzle.Solver;
 
 public class SaveHandler {
 
-    public static void promptSave(Solver solver) {
+    public static void promptSave(Scanner scanner, Solver solver) {
         Path filePath;
         Config config = solver.getConfig();
-        try (Scanner scanner = new Scanner(System.in)) {
+        try {
             System.out.print("Save result?: ");
             String res;
             do {

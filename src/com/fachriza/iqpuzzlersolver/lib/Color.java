@@ -1,5 +1,6 @@
 package com.fachriza.iqpuzzlersolver.lib;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Color {
@@ -91,6 +92,37 @@ public class Color {
             Map.entry(Colors.UNDER_WHITE, "\033[1;37m"),
             Map.entry(Colors.BACK_RED, "\033[41m"),
             Map.entry(Colors.BACK_GREEN, "\033[42m"));
+
+    public static Map<Colors, java.awt.Color> colorMap = new HashMap<>();
+
+    static {
+        colorMap.put(Color.Colors.BLACK, new java.awt.Color(0, 0, 0)); // Black
+        colorMap.put(Color.Colors.RED, new java.awt.Color(205, 0, 0)); // Red
+        colorMap.put(Color.Colors.GREEN, new java.awt.Color(0, 205, 0)); // Green
+        colorMap.put(Color.Colors.YELLOW, new java.awt.Color(205, 205, 0)); // Yellow
+        colorMap.put(Color.Colors.BLUE, new java.awt.Color(0, 0, 238)); // Blue
+        colorMap.put(Color.Colors.MAGENTA, new java.awt.Color(205, 0, 205)); // Magenta
+        colorMap.put(Color.Colors.CYAN, new java.awt.Color(0, 205, 205)); // Cyan
+        colorMap.put(Color.Colors.WHITE, new java.awt.Color(229, 229, 229)); // White (Light Gray)
+        colorMap.put(Color.Colors.BRIGHT_BLACK, new java.awt.Color(127, 127, 127)); // Bright Black (Dark Gray)
+        colorMap.put(Color.Colors.BRIGHT_RED, new java.awt.Color(255, 0, 0)); // Bright Red
+        colorMap.put(Color.Colors.BRIGHT_GREEN, new java.awt.Color(0, 255, 0)); // Bright Green
+        colorMap.put(Color.Colors.BRIGHT_YELLOW, new java.awt.Color(255, 255, 0)); // Bright Yellow
+        colorMap.put(Color.Colors.BRIGHT_BLUE, new java.awt.Color(92, 92, 255)); // Bright Blue
+        colorMap.put(Color.Colors.BRIGHT_MAGENTA, new java.awt.Color(255, 0, 255)); // Bright Magenta
+        colorMap.put(Color.Colors.BRIGHT_CYAN, new java.awt.Color(0, 255, 255)); // Bright Cyan
+        colorMap.put(Color.Colors.BRIGHT_WHITE, new java.awt.Color(180, 180, 180)); // Bright White
+        colorMap.put(Color.Colors.UNDER_BLACK, new java.awt.Color(0, 205, 205)); // Cyan
+        colorMap.put(Color.Colors.UNDER_RED, new java.awt.Color(229, 229, 229)); // White (Light Gray)
+        colorMap.put(Color.Colors.UNDER_GREEN, new java.awt.Color(127, 127, 127)); // Bright Black (Dark Gray)
+        colorMap.put(Color.Colors.UNDER_YELLOW, new java.awt.Color(255, 0, 0)); // Bright Red
+        colorMap.put(Color.Colors.UNDER_BLUE, new java.awt.Color(0, 255, 0)); // Bright Green
+        colorMap.put(Color.Colors.UNDER_MAGENTA, new java.awt.Color(255, 255, 0)); // Bright Yellow
+        colorMap.put(Color.Colors.UNDER_CYAN, new java.awt.Color(92, 92, 255)); // Bright Blue
+        colorMap.put(Color.Colors.UNDER_WHITE, new java.awt.Color(255, 0, 255)); // Bright Magenta
+        colorMap.put(Color.Colors.BACK_RED, new java.awt.Color(90, 0, 0)); // Bright Cyan
+        colorMap.put(Color.Colors.BACK_GREEN, new java.awt.Color(0, 90, 0)); // Bright White
+    }
 
     public static String colorize(String string, Colors color) {
         return String.join("", ColorMap.get(color), string, RESET);

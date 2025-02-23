@@ -124,6 +124,10 @@ public class Solver {
         return stack;
     }
 
+    public SolverState getState() {
+        return state;
+    }
+
     public String getResult() {
         StringBuilder sb = new StringBuilder();
         String NL = System.lineSeparator();
