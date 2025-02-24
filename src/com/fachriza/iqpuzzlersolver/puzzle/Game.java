@@ -26,6 +26,7 @@ public class Game {
 
     public void readConfig() {
         try {
+            System.out.print("Masukkan nama file: ");
             configHandler = new ConfigHandler(scanner.nextLine());
         } catch (Exception e) {
             System.err.println(e.getMessage());
