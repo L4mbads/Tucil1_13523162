@@ -3,5 +3,5 @@ FAIL: No valid solution
 XX
 XX
 
-Time : 0.1102 ms
+Time : 0.0918 ms
 Cases: 0

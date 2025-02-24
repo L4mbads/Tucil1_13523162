@@ -1,8 +1,0 @@
-SUCCESS
-
-ZZFFI
-ZLLFA
-ZBLLA
-
-Time : 0.5329 ms
-Cases: 15

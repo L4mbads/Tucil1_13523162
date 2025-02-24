@@ -1,0 +1,9 @@
+FAIL: Too much blocks
+Block I was never used
+
+ABBBBBBGGG
+ABBCDDFGHG
+AAEEEDFGGG
+
+Time : 141.9598 ms
+Cases: 149231

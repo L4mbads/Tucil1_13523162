@@ -6,5 +6,5 @@ BBBCCCC
 .EEECD.
 ...E...
 
-Time : 1.3129 ms
+Time : 1.2598 ms
 Cases: 40

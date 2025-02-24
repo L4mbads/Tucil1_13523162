@@ -1,0 +1,7 @@
+FAIL: Need more blocks
+ZZFFI
+ZLLFA
+ZXLLA
+
+Time : 0.5202 ms
+Cases: 14

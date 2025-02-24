@@ -6,5 +6,5 @@ F.HH.DDG.K
 F.PP.DGGKK
 FFPPPDDGKK
 
-Time : 37.7459 ms
+Time : 37.7746 ms
 Cases: 3733
