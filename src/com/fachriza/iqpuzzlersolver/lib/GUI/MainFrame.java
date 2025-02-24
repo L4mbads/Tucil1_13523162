@@ -2,6 +2,7 @@ package com.fachriza.iqpuzzlersolver.lib.GUI;
 
 import javax.swing.*;
 
+import com.fachriza.iqpuzzlersolver.lib.SaveHandler;
 import com.fachriza.iqpuzzlersolver.lib.config.Config;
 import com.fachriza.iqpuzzlersolver.puzzle.Game;
 import com.fachriza.iqpuzzlersolver.puzzle.Solver.SolverState;
@@ -12,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class MainFrame {
     private JFrame frame;
@@ -26,7 +28,7 @@ public class MainFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        frame = new JFrame("File Processor");
+        frame = new JFrame("IQPuzzlerSolver");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600, 400);
         frame.setLayout(new BorderLayout());
@@ -87,14 +89,30 @@ public class MainFrame {
         drawPanel.setGame(game);
         if (game.getSolver().getState() == SolverState.SUCCESS) {
             SwingUtilities.invokeLater(
-                    () -> statusLabel.setText(String.format("Time: %f ms, %d cases",
+                    () -> statusLabel.setText(String.format("SUCCESS Time: %f ms, %d cases",
                             game.getSolver().getTimeElapsedInNs() * 1e-6, game.getSolver().getCases())));
         } else {
+            final String code;
+            switch (game.getSolver().getState()) {
+                case SolverState.FAIL_LESS_PIECE:
+                    code = "Need more blocks";
+                    break;
+                case SolverState.FAIL_OVER_PIECE:
+                    code = "Too much blocks";
+                    break;
+                case SolverState.FAIL_NO_SOLUTION:
+                    code = "No valid solution";
+                    break;
+                default:
+                    code = "";
+                    break;
+            }
             SwingUtilities.invokeLater(
-                    () -> statusLabel.setText(String.format("Failed",
+                    () -> statusLabel.setText(String.format("FAILED(%s) Time: %f ms, %d cases", code,
                             game.getSolver().getTimeElapsedInNs() * 1e-6, game.getSolver().getCases())));
 
         }
+        SaveHandler.promptSave(new Scanner(System.in), game.getSolver());
     }
 
     private static class DrawPanel extends JPanel {
